@@ -1,0 +1,18 @@
+{% extends 'registration/base1.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-6">
+        {{ form.username|as_crispy_field }}
+      </div>
+      <div class="col-9">
+        {{ form.password|as_crispy_field }}
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success">LogIn</button>
+  </form>
+{% endblock content %}
