@@ -11,3 +11,10 @@ class ServiceProvider(models.Model):
 class ServiceFinder(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
+class Services(models.Model):
+    service_name = models.CharField(max_length=30)
+    service_description = models.TextField(null=True)
+
+    class Meta():
+        db_table = 'services'
+

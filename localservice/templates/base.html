@@ -34,12 +34,53 @@
     
     -->
     <style>
-        .has-sub{
-            background-color: rgba(189, 247, 232, 0.651);
+        .has-sub {
+            background-color: #5d625f;
             color: white;
         }
+
+        .dropbtn {
+            background-color: #5d625f;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px #5d625f;
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #5d625f;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #5d625f;
+        }
     </style>
-    
+
 </head>
 
 <body>
@@ -63,7 +104,7 @@
     <script src="{% static 'assets/js/isotope.js' %}"></script>
     <script src="{% static 'assets/js/tabs.js' %}"></script>
 
-    
+
     {% endblock js %}
 
 </body>

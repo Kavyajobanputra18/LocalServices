@@ -1,0 +1,25 @@
+{% extends 'base2.html' %}
+{% block container %}
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">Service-Details #{{ book.id }}</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">
+                    Service Name
+                </dt>
+                <dd class="col-sm-9">
+                    {{ service.name }}
+                </dd>
+                <dt class="col-sm-3">
+                    Service Description
+                </dt>
+                <dt class="col-sm-3">
+                    {{ service.description }}
+                </dt>
+                </dd>
+            </dl>
+        </div>
+    </div>
+{% endblock container %}

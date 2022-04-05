@@ -1,0 +1,43 @@
+{% extends "base2.html" %}
+
+{% block container %}
+
+<table class="table">
+    <tr>
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <!-- <th scope="col">Address</th>
+                <th scope="col">Phone</th> -->
+                <!-- <th scope="col">Website</th> -->
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td><a href="{% url 'detail_service' service.pk%}">{{ service.id}}</a></td>
+                {%comment%}<td><a href="{% url 'detail_service' service.pk %}">{{service.id}}</a></td>{%endcomment%}
+                <td>{{service.name}}</td>
+                <!-- <td>{{serviceprovider.email}}</td>
+                <td>{{serviceprovider.address}}</td>
+                <td>{{serviceprovider.phone}}</td> -->
+                <!-- <td>{{serviceprovider.website}}</td> -->
+                <td>{{service.description}}</td>
+                <td>
+
+                    <a class="btn btn-danger" href="{% url 'delete_service' service.pk %}">Delete</a>
+                    <a class="btn btn-primary" href="{% url 'update_service' service.pk %}">Update</a>
+                    {% comment %} <a href="{% url 'exam_update' exam.pk%}">Update</a>
+                    <a href="{% url 'exam_delete' exam.pk%}">DELETE</a> {% endcomment %}
+                </td>
+
+
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+
+
+{% endblock container %}
