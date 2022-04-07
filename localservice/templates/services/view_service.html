@@ -19,12 +19,12 @@
             <tr>
                 <td><a href="{% url 'detail_service' service.pk%}">{{ service.id}}</a></td>
                 {%comment%}<td><a href="{% url 'detail_service' service.pk %}">{{service.id}}</a></td>{%endcomment%}
-                <td>{{service.name}}</td>
+                <td>{{service.service_name}}</td>
                 <!-- <td>{{serviceprovider.email}}</td>
                 <td>{{serviceprovider.address}}</td>
                 <td>{{serviceprovider.phone}}</td> -->
                 <!-- <td>{{serviceprovider.website}}</td> -->
-                <td>{{service.description}}</td>
+                <td>{{service.service_description}}</td>
                 <td>
 
                     <a class="btn btn-danger" href="{% url 'delete_service' service.pk %}">Delete</a>

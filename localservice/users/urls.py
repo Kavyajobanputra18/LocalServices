@@ -20,5 +20,9 @@ urlpatterns = [
     path('<int:pk>/view/',DetailService.as_view(),name='detail_service'),
     path('<int:pk>/delete/',DeleteService.as_view(),name='delete_service'),
     path('<int:pk>/update/',UpdateService.as_view(),name='update_service'),
+    # path('profile/',views.profile,name = 'profile')
+    path("profile/<int:pk>",views.Profile,name="profile"),
+    path("updateprofile/<int:pk>",views.UpdateProfile,name="updateprofile"),
+    path('index1/',views.index2 ,name= 'index1'),
 
 ]

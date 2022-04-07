@@ -15,6 +15,9 @@ from .models import Services
 def index(request):
     return render(request, 'users/index.html')
 
+def index1(request):
+    return render(request, 'users/loginafterindex.html')
+
 def listing(request):
     return render(request, 'users/listing.html')
 
@@ -44,12 +47,12 @@ class SProviderSignUpView(CreateView):
         user = form.save()
         #//-->session
         login(self.request, user)
-        return redirect('/')
+        return redirect('index2')
 
 class SFinderSignUpView(CreateView):
     model = User
     form_class = ServiceProviderForm
-    template_name = 'registration/sfinder_signup.html'
+    template_name = 'registration/sf8inder_signup.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type']= 'servicefinder'
@@ -59,7 +62,7 @@ class SFinderSignUpView(CreateView):
         user = form.save()
         #//-->session
         login(self.request, user)
-        return redirect('/')
+        return redirect('index2')
 
 class LoginView(LoginView):
     template_name = 'registration/login.html'
@@ -92,6 +95,7 @@ class ViewService(ListView):
     model = Services
     fields = ['service_name','service_description']
     services = model.objects.all()
+    context_object_name='services'
     template_name = 'services/view_service.html'
     success_url = '/users/'
 
@@ -111,3 +115,24 @@ class UpdateService(UpdateView):
     fields = ['serivce_name']
     template_name = 'services/update_service.html'
     success_url = '/users/view'
+
+
+# def profile(request):
+#     return render(request, 'users/myprofile.html')
+
+def Profile(request,pk):
+    user = User.objects.get(pk=pk)
+    servicefinder = ServiceFinder.objects.get(user_id=user)
+    return render(request, 'users/myprofile.html',{'user':user,'cust':cust})
+
+def UpdateProfile(request,pk):
+    user = User.objects.get(pk=pk)
+    if user.role == "ServiceFinder":
+        sfinder = ServiceFinder.objects.get(user_id=user)
+        sfinder.address = request.POST['address']
+        sfinder.city = request.POST['city']
+        sfinder.state = request.POST['state']
+        sfinder.pincode = request.POST['pincode']
+        sfinder.save()
+        url = f'/profile/{pk}'
+        return redirect(url)
