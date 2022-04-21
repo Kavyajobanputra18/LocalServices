@@ -32,3 +32,4 @@ class ServiceFinderForm(UserCreationForm):
         user.is_servicefinder = True
         user.save()
         return user
+

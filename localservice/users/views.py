@@ -10,6 +10,12 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.shortcuts import HttpResponse
 from .models import Services
+from django.contrib.auth.decorators import login_required
+
+#for email
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.core.mail import EmailMultiAlternatives
 
 # Create your views here.
 def index(request):
@@ -47,12 +53,23 @@ class SProviderSignUpView(CreateView):
         user = form.save()
         #//-->session
         login(self.request, user)
-        return redirect('index2')
+        username=form.cleaned_data.get('username')
+        password1 = form.cleaned_data.get('password1')
+        dict = {'username':username, 'password1': password1}
+        subject, from_email, to = 'subject', settings.EMAIL_HOST_USER, form.cleaned_data.get('email')
+        
+        html_content=render_to_string('users/email.html', dict)
+        text_content = strip_tags(html_content)
+
+        msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()      
+        return redirect('/users/login/')
 
 class SFinderSignUpView(CreateView):
     model = User
     form_class = ServiceProviderForm
-    template_name = 'registration/sf8inder_signup.html'
+    template_name = 'registration/sfinder_signup.html'
 
     def get_context_data(self, **kwargs):
         kwargs['user_type']= 'servicefinder'
@@ -62,7 +79,17 @@ class SFinderSignUpView(CreateView):
         user = form.save()
         #//-->session
         login(self.request, user)
-        return redirect('index2')
+        username=form.cleaned_data.get('username')
+        password1 = form.cleaned_data.get('password1')
+        dict = {'username':username, 'password1': password1}
+        subject, from_email, to = 'subject', settings.EMAIL_HOST_USER, form.cleaned_data.get('email')
+        html_content=render_to_string('users/email.html', dict)
+        text_content = strip_tags(html_content)
+        msg= EmailMultiAlternatives(subject, text_content, from_email, [to])
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()      
+        
+        return redirect('/users/login/')
 
 class LoginView(LoginView):
     template_name = 'registration/login.html'
@@ -118,21 +145,25 @@ class UpdateService(UpdateView):
 
 
 # def profile(request):
-#     return render(request, 'users/myprofile.html')
+#     return render(request, 'users/profile.html')
 
-def Profile(request,pk):
-    user = User.objects.get(pk=pk)
-    servicefinder = ServiceFinder.objects.get(user_id=user)
-    return render(request, 'users/myprofile.html',{'user':user,'cust':cust})
+# def Profile(request,pk):
+#     user = User.objects.get(pk=pk)
+#     servicefinder = ServiceFinder.objects.get(user_id=user)
+#     return render(request, 'users/profile.html',{'user':user,'servicefinder':servicefinder})
 
-def UpdateProfile(request,pk):
-    user = User.objects.get(pk=pk)
-    if user.role == "ServiceFinder":
-        sfinder = ServiceFinder.objects.get(user_id=user)
-        sfinder.address = request.POST['address']
-        sfinder.city = request.POST['city']
-        sfinder.state = request.POST['state']
-        sfinder.pincode = request.POST['pincode']
-        sfinder.save()
-        url = f'/profile/{pk}'
-        return redirect(url)
+# def UpdateProfile(request,pk):
+#     user = User.objects.get(pk=pk)
+#     if user.role == "ServiceFinder":
+#         sfinder = ServiceFinder.objects.get(user_id=user)
+#         sfinder.address = request.POST['address']
+#         sfinder.city = request.POST['city']
+#         sfinder.state = request.POST['state']
+#         sfinder.pincode = request.POST['pincode']
+#         sfinder.save()
+#         url = f'/profile/{pk}'
+#         return redirect(url)
+
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')

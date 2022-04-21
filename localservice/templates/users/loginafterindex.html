@@ -30,27 +30,32 @@
             <!-- ***** Logo End ***** -->
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
-               <!-- Changes -->
+              <!-- Changes -->
               <li><a href=""><b> <b>Unnati Informatics</b></b></a></li>
               <li><a href="{% url 'index' %}" class="active">Home</a></li>
               <li><a href="{% url 'category' %}">Category</a></li>
               <li><a href="{% url 'listing' %}">Listing</a></li>
               <li><a href="{% url 'contact' %}">Contact Us</a></li>
               <li><a href="{% url 'view_service' %}">Services</a></li>
-              <li><a href="{% url 'profile' %}">My Profile</a></li>
-              
+              <li><a href="{% url 'users-profile' %}">Profile</a></li>
+              <!-- <li><a href="{% url 'index' %}">Logout</a></li>  -->
 
-              {% comment %}<li>
-                <div class="main-white-button"><a href="#"><i class="fa fa-plus"></i> Add Your Listing</a></div>
-              </li>{% endcomment %}
-               <!-- Changes -->
-              <li class="has-sub">
+              <!-- Changes -->
+              <!-- <li class="has-sub">
                 <a href="javascript:void(0)">Signup</a>
                 <ul class="sub-menu">
-                    <li><a href="{% url 'sprovider' %}">Service Provider</a></li>
-                    <li><a href="{% url 'sfinder' %}">Service Finder</a></li>
+                  <li><a href="{% url 'sprovider' %}">Service Provider</a></li>
+                  <li><a href="{% url 'sfinder' %}">Service Finder</a></li>
                 </ul>
-            </li>
+              </li> -->
+
+
+
+              
+              <li>
+                <div class="main-white-button"><a href="{% url 'index' %}"><i class="fa fa-plus"></i> Logout</a></div>
+              </li>
+
             </ul>
             <a class='menu-trigger'>
               <span>Menu</span>
@@ -343,7 +348,7 @@
                         <li>(18) Reviews</li>
                       </ul>
                       <span class="price">
-                        <div class="icon"><img src="{% static 'assets/images/listing-icon-01.png' %}" alt=""></div> $450
+                        <div class="icon"><img src="{% static 'assets/images/listing-icon-01.png' %}" alt=""></div> Rs-450
                         - Rs-950 / month
                         with taxes
                       </span>

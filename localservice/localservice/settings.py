@@ -138,13 +138,16 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = '/index1/'
+LOGIN_REDIRECT_URL = '/users/index1/'
 LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'jobanputrakavya18@gmail.com'
-EMAIL_HOST_PASSWORD = 'Kavya@1810'
+EMAIL_HOST_USER = 'myinternshipproject1810@gmail.com'
+EMAIL_HOST_PASSWORD = 'internal101'
 EMAIL_PORT = 587
 EMAIL_USE_SSL = False
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
